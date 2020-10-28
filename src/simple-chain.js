@@ -23,18 +23,13 @@ const chainMaker = {
   reverseChain() {
     this.result = this.result.reverse();
       return this;
-
   },
   finishChain() {
     let finishchain = "";
-    for (let i of this.result) {
-      finishchain += `( ${i} )~~`;
-    }
+    this.result.forEach(el => finishchain += `( ${el} )~~`)
     this.result = [];
     return finishchain.slice(0, -2);
   },
 };
 
 module.exports = chainMaker;
-
-
