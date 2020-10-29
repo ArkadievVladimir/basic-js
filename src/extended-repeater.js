@@ -1,21 +1,18 @@
 const CustomError = require("../extensions/custom-error");
 
-module.exports = function repeater(str, options) {
-  let result = '',
-  strRep = options.repeatTimes,
-  strSep = options.separator,
-  add = options.addition,
-  addRep = options.additionRepeatTimes,
-  addSep = options.additionSeparator;
-  
-  if (strRep === undefined || strRep === 0) strRep = 1
-  if (addRep === undefined || addRep === 0) addRep = 1
-  if (strSep === undefined) strSep = '+'
-  if (addSep === undefined) addSep = '|'
-  if    (add === undefined) add = ''
+module.exports = function repeater(str, 
+  {
+    repeatTimes: strRep, 
+    separator: strSep, 
+    addition: add, 
+    additionRepeatTimes: addRep, 
+    additionSeparator: addSep 
+  }
+  ) {
 
-  result = gen(add, addRep, addSep)
-  return gen(str, strRep, strSep, result)
+  if (add === undefined) add = ''
+  result = gen(add, addRep || 1, addSep || '|')
+  return gen(str, strRep || 1, strSep || '+', result)
 };
   
 function gen(str, max, separator1, separator2 = '') {
